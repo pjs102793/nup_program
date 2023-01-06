@@ -1,7 +1,7 @@
 # onnx model exporting
-# python3 test.py \
-#         --weights-file ../model_zoo/EDSR_x2_patch240_nonoise_best.pth \
-#         --image-file images/Lenna.png --scale 2 --onnx-export
+python3 test.py \
+        --weights-file ../model_zoo/EDSR_x2_patch240_nonoise_best.pth \
+        --image-file images/Lenna.png --scale 2 --onnx-export
 
 # jit model exporting
 # python3 test.py --weights-file ../model_zoo/EDSR_x2_patch240_nonoise_best.pth --image-file images/Lenna.png --scale 2 --jit-export

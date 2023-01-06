@@ -8,10 +8,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y locales libb64-dev libgl1-mesa-glx \
     && locale-gen ko_KR.UTF-8 \
     && pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116 \
-    && pip3 install tritonclient[all] opencv-python
+    && pip3 install tritonclient[all] opencv-python tqdm
 
 ENV LC_ALL ko_KR.UTF-8
 
-WORKDIR /workspace
+WORKDIR /workspace/test
 
 RUN ["/bin/bash"]

@@ -6,16 +6,26 @@ Nup Tiering Program에서 세미나 할 때 사용한 실습 코드입니다.
 
 이 실습은 Docker 이미지인 nvcr.io/nvidia/tensorrt:22.04-py3 이미지에 Pytorch는 1.12.0+cu116 버전을 사용하였습니다. 자세한 것은 Dockerfile을 참고하시기 바랍니다.
 
+빌드 방법은 다음과 같습니다.
+```bash
+make build
+```
+
+빌드된 이미지에 접속하는 명령어는 다음과 같습니다.
+```bash
+make run
+```
+
 아래 Easy TRTIS Setup와 Run Client 부분은 Dockerfile로 빌드된 이미지를 사용하여 작업하는 것을 권장합니다.
 ## Easy TRTIS Setup
 ```bash
 # Step 1: pth to jit and TensorRT Model
-cd /full/path/to/nup_program/TensorRT/EDSR-PyTorch
+cd /workspace/test/TensorRT/EDSR-PyTorch
 
 bash ./exporting_run.sh
 
 # Step 2: model copy to trtis_model_zoo
-cd /full/path/to/nup_program/TensorRT
+cd /workspace/test/TensorRT
 
 bash trtis_setup.sh
 ```
@@ -25,12 +35,12 @@ bash trtis_setup.sh
 
 ```bash
 # Local Machine 에서 가동
-docker run --rm --name="trtis2" --gpus='"device=0"' -p 8010:8000 -p 8011:8001 -p 8012:8002 --ipc=host -v /full/path/to/nup_program/Triton_Inference_Server/trtis_model_zoo:/models nvcr.io/nvidia/tritonserver:22.04-py3 tritonserver --model-repository=/models
+docker run --rm --name="trtis2" --gpus='"device=3"' -p 8010:8000 -p 8011:8001 -p 8012:8002 --ipc=host -v /full/path/to/nup_program/Triton_Inference_Server/trtis_model_zoo:/models nvcr.io/nvidia/tritonserver:22.04-py3 tritonserver --model-repository=/models
 ```
 
 ## Run client
 ```bash
-cd /full/path/to/nup_program/Triton_Inference_Server
+cd /workspace/test/Triton_Inference_Server
 python infer_client.py
 
 # 아래가 출력되면 성공!
